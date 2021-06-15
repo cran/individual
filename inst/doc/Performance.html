@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+<title>Table of Contents {#toc}</title>
+
+<script type="text/javascript">
+window.onload = function() {
+  var imgs = document.getElementsByTagName('img'), i, img;
+  for (i = 0; i < imgs.length; i++) {
+    img = imgs[i];
+    // center an image if it is the only element of its parent
+    if (img.parentElement.childElementCount === 1)
+      img.parentElement.style.textAlign = 'center';
+  }
+};
+</script>
+
+<!-- Styles for R syntax highlighter -->
+<style type="text/css">
+   pre .operator,
+   pre .paren {
+     color: rgb(104, 118, 135)
+   }
+
+   pre .literal {
+     color: #990073
+   }
+
+   pre .number {
+     color: #099;
+   }
+
+   pre .comment {
+     color: #998;
+     font-style: italic
+   }
+
+   pre .keyword {
+     color: #900;
+     font-weight: bold
+   }
+
+   pre .identifier {
+     color: rgb(0, 0, 0);
+   }
+
+   pre .string {
+     color: #d14;
+   }
+</style>
+
+<!-- R syntax highlighter -->
+<script type="text/javascript">
+var hljs=new function(){function m(p){return p.replace(/&/gm,"&amp;").replace(/</gm,"&lt;")}function f(r,q,p){return RegExp(q,"m"+(r.cI?"i":"")+(p?"g":""))}function b(r){for(var p=0;p<r.childNodes.length;p++){var q=r.childNodes[p];if(q.nodeName=="CODE"){return q}if(!(q.nodeType==3&&q.nodeValue.match(/\s+/))){break}}}function h(t,s){var p="";for(var r=0;r<t.childNodes.length;r++){if(t.childNodes[r].nodeType==3){var q=t.childNodes[r].nodeValue;if(s){q=q.replace(/\n/g,"")}p+=q}else{if(t.childNodes[r].nodeName=="BR"){p+="\n"}else{p+=h(t.childNodes[r])}}}if(/MSIE [678]/.test(navigator.userAgent)){p=p.replace(/\r/g,"\n")}return p}function a(s){var r=s.className.split(/\s+/);r=r.concat(s.parentNode.className.split(/\s+/));for(var q=0;q<r.length;q++){var p=r[q].replace(/^language-/,"");if(e[p]){return p}}}function c(q){var p=[];(function(s,t){for(var r=0;r<s.childNodes.length;r++){if(s.childNodes[r].nodeType==3){t+=s.childNodes[r].nodeValue.length}else{if(s.childNodes[r].nodeName=="BR"){t+=1}else{if(s.childNodes[r].nodeType==1){p.push({event:"start",offset:t,node:s.childNodes[r]});t=arguments.callee(s.childNodes[r],t);p.push({event:"stop",offset:t,node:s.childNodes[r]})}}}}return t})(q,0);return p}function k(y,w,x){var q=0;var z="";var s=[];function u(){if(y.length&&w.length){if(y[0].offset!=w[0].offset){return(y[0].offset<w[0].offset)?y:w}else{return w[0].event=="start"?y:w}}else{return y.length?y:w}}function t(D){var A="<"+D.nodeName.toLowerCase();for(var B=0;B<D.attributes.length;B++){var C=D.attributes[B];A+=" "+C.nodeName.toLowerCase();if(C.value!==undefined&&C.value!==false&&C.value!==null){A+='="'+m(C.value)+'"'}}return A+">"}while(y.length||w.length){var v=u().splice(0,1)[0];z+=m(x.substr(q,v.offset-q));q=v.offset;if(v.event=="start"){z+=t(v.node);s.push(v.node)}else{if(v.event=="stop"){var p,r=s.length;do{r--;p=s[r];z+=("</"+p.nodeName.toLowerCase()+">")}while(p!=v.node);s.splice(r,1);while(r<s.length){z+=t(s[r]);r++}}}}return z+m(x.substr(q))}function j(){function q(x,y,v){if(x.compiled){return}var u;var s=[];if(x.k){x.lR=f(y,x.l||hljs.IR,true);for(var w in x.k){if(!x.k.hasOwnProperty(w)){continue}if(x.k[w] instanceof Object){u=x.k[w]}else{u=x.k;w="keyword"}for(var r in u){if(!u.hasOwnProperty(r)){continue}x.k[r]=[w,u[r]];s.push(r)}}}if(!v){if(x.bWK){x.b="\\b("+s.join("|")+")\\s"}x.bR=f(y,x.b?x.b:"\\B|\\b");if(!x.e&&!x.eW){x.e="\\B|\\b"}if(x.e){x.eR=f(y,x.e)}}if(x.i){x.iR=f(y,x.i)}if(x.r===undefined){x.r=1}if(!x.c){x.c=[]}x.compiled=true;for(var t=0;t<x.c.length;t++){if(x.c[t]=="self"){x.c[t]=x}q(x.c[t],y,false)}if(x.starts){q(x.starts,y,false)}}for(var p in e){if(!e.hasOwnProperty(p)){continue}q(e[p].dM,e[p],true)}}function d(B,C){if(!j.called){j();j.called=true}function q(r,M){for(var L=0;L<M.c.length;L++){if((M.c[L].bR.exec(r)||[null])[0]==r){return M.c[L]}}}function v(L,r){if(D[L].e&&D[L].eR.test(r)){return 1}if(D[L].eW){var M=v(L-1,r);return M?M+1:0}return 0}function w(r,L){return L.i&&L.iR.test(r)}function K(N,O){var M=[];for(var L=0;L<N.c.length;L++){M.push(N.c[L].b)}var r=D.length-1;do{if(D[r].e){M.push(D[r].e)}r--}while(D[r+1].eW);if(N.i){M.push(N.i)}return f(O,M.join("|"),true)}function p(M,L){var N=D[D.length-1];if(!N.t){N.t=K(N,E)}N.t.lastIndex=L;var r=N.t.exec(M);return r?[M.substr(L,r.index-L),r[0],false]:[M.substr(L),"",true]}function z(N,r){var L=E.cI?r[0].toLowerCase():r[0];var M=N.k[L];if(M&&M instanceof Array){return M}return false}function F(L,P){L=m(L);if(!P.k){return L}var r="";var O=0;P.lR.lastIndex=0;var M=P.lR.exec(L);while(M){r+=L.substr(O,M.index-O);var N=z(P,M);if(N){x+=N[1];r+='<span class="'+N[0]+'">'+M[0]+"</span>"}else{r+=M[0]}O=P.lR.lastIndex;M=P.lR.exec(L)}return r+L.substr(O,L.length-O)}function J(L,M){if(M.sL&&e[M.sL]){var r=d(M.sL,L);x+=r.keyword_count;return r.value}else{return F(L,M)}}function I(M,r){var L=M.cN?'<span class="'+M.cN+'">':"";if(M.rB){y+=L;M.buffer=""}else{if(M.eB){y+=m(r)+L;M.buffer=""}else{y+=L;M.buffer=r}}D.push(M);A+=M.r}function G(N,M,Q){var R=D[D.length-1];if(Q){y+=J(R.buffer+N,R);return false}var P=q(M,R);if(P){y+=J(R.buffer+N,R);I(P,M);return P.rB}var L=v(D.length-1,M);if(L){var O=R.cN?"</span>":"";if(R.rE){y+=J(R.buffer+N,R)+O}else{if(R.eE){y+=J(R.buffer+N,R)+O+m(M)}else{y+=J(R.buffer+N+M,R)+O}}while(L>1){O=D[D.length-2].cN?"</span>":"";y+=O;L--;D.length--}var r=D[D.length-1];D.length--;D[D.length-1].buffer="";if(r.starts){I(r.starts,"")}return R.rE}if(w(M,R)){throw"Illegal"}}var E=e[B];var D=[E.dM];var A=0;var x=0;var y="";try{var s,u=0;E.dM.buffer="";do{s=p(C,u);var t=G(s[0],s[1],s[2]);u+=s[0].length;if(!t){u+=s[1].length}}while(!s[2]);if(D.length>1){throw"Illegal"}return{r:A,keyword_count:x,value:y}}catch(H){if(H=="Illegal"){return{r:0,keyword_count:0,value:m(C)}}else{throw H}}}function g(t){var p={keyword_count:0,r:0,value:m(t)};var r=p;for(var q in e){if(!e.hasOwnProperty(q)){continue}var s=d(q,t);s.language=q;if(s.keyword_count+s.r>r.keyword_count+r.r){r=s}if(s.keyword_count+s.r>p.keyword_count+p.r){r=p;p=s}}if(r.language){p.second_best=r}return p}function i(r,q,p){if(q){r=r.replace(/^((<[^>]+>|\t)+)/gm,function(t,w,v,u){return w.replace(/\t/g,q)})}if(p){r=r.replace(/\n/g,"<br>")}return r}function n(t,w,r){var x=h(t,r);var v=a(t);var y,s;if(v){y=d(v,x)}else{return}var q=c(t);if(q.length){s=document.createElement("pre");s.innerHTML=y.value;y.value=k(q,c(s),x)}y.value=i(y.value,w,r);var u=t.className;if(!u.match("(\\s|^)(language-)?"+v+"(\\s|$)")){u=u?(u+" "+v):v}if(/MSIE [678]/.test(navigator.userAgent)&&t.tagName=="CODE"&&t.parentNode.tagName=="PRE"){s=t.parentNode;var p=document.createElement("div");p.innerHTML="<pre><code>"+y.value+"</code></pre>";t=p.firstChild.firstChild;p.firstChild.cN=s.cN;s.parentNode.replaceChild(p.firstChild,s)}else{t.innerHTML=y.value}t.className=u;t.result={language:v,kw:y.keyword_count,re:y.r};if(y.second_best){t.second_best={language:y.second_best.language,kw:y.second_best.keyword_count,re:y.second_best.r}}}function o(){if(o.called){return}o.called=true;var r=document.getElementsByTagName("pre");for(var p=0;p<r.length;p++){var q=b(r[p]);if(q){n(q,hljs.tabReplace)}}}function l(){if(window.addEventListener){window.addEventListener("DOMContentLoaded",o,false);window.addEventListener("load",o,false)}else{if(window.attachEvent){window.attachEvent("onload",o)}else{window.onload=o}}}var e={};this.LANGUAGES=e;this.highlight=d;this.highlightAuto=g;this.fixMarkup=i;this.highlightBlock=n;this.initHighlighting=o;this.initHighlightingOnLoad=l;this.IR="[a-zA-Z][a-zA-Z0-9_]*";this.UIR="[a-zA-Z_][a-zA-Z0-9_]*";this.NR="\\b\\d+(\\.\\d+)?";this.CNR="\\b(0[xX][a-fA-F0-9]+|(\\d+(\\.\\d*)?|\\.\\d+)([eE][-+]?\\d+)?)";this.BNR="\\b(0b[01]+)";this.RSR="!|!=|!==|%|%=|&|&&|&=|\\*|\\*=|\\+|\\+=|,|\\.|-|-=|/|/=|:|;|<|<<|<<=|<=|=|==|===|>|>=|>>|>>=|>>>|>>>=|\\?|\\[|\\{|\\(|\\^|\\^=|\\||\\|=|\\|\\||~";this.ER="(?![\\s\\S])";this.BE={b:"\\\\.",r:0};this.ASM={cN:"string",b:"'",e:"'",i:"\\n",c:[this.BE],r:0};this.QSM={cN:"string",b:'"',e:'"',i:"\\n",c:[this.BE],r:0};this.CLCM={cN:"comment",b:"//",e:"$"};this.CBLCLM={cN:"comment",b:"/\\*",e:"\\*/"};this.HCM={cN:"comment",b:"#",e:"$"};this.NM={cN:"number",b:this.NR,r:0};this.CNM={cN:"number",b:this.CNR,r:0};this.BNM={cN:"number",b:this.BNR,r:0};this.inherit=function(r,s){var p={};for(var q in r){p[q]=r[q]}if(s){for(var q in s){p[q]=s[q]}}return p}}();hljs.LANGUAGES.cpp=function(){var a={keyword:{"false":1,"int":1,"float":1,"while":1,"private":1,"char":1,"catch":1,"export":1,virtual:1,operator:2,sizeof:2,dynamic_cast:2,typedef:2,const_cast:2,"const":1,struct:1,"for":1,static_cast:2,union:1,namespace:1,unsigned:1,"long":1,"throw":1,"volatile":2,"static":1,"protected":1,bool:1,template:1,mutable:1,"if":1,"public":1,friend:2,"do":1,"return":1,"goto":1,auto:1,"void":2,"enum":1,"else":1,"break":1,"new":1,extern:1,using:1,"true":1,"class":1,asm:1,"case":1,typeid:1,"short":1,reinterpret_cast:2,"default":1,"double":1,register:1,explicit:1,signed:1,typename:1,"try":1,"this":1,"switch":1,"continue":1,wchar_t:1,inline:1,"delete":1,alignof:1,char16_t:1,char32_t:1,constexpr:1,decltype:1,noexcept:1,nullptr:1,static_assert:1,thread_local:1,restrict:1,_Bool:1,complex:1},built_in:{std:1,string:1,cin:1,cout:1,cerr:1,clog:1,stringstream:1,istringstream:1,ostringstream:1,auto_ptr:1,deque:1,list:1,queue:1,stack:1,vector:1,map:1,set:1,bitset:1,multiset:1,multimap:1,unordered_set:1,unordered_map:1,unordered_multiset:1,unordered_multimap:1,array:1,shared_ptr:1}};return{dM:{k:a,i:"</",c:[hljs.CLCM,hljs.CBLCLM,hljs.QSM,{cN:"string",b:"'\\\\?.",e:"'",i:"."},{cN:"number",b:"\\b(\\d+(\\.\\d*)?|\\.\\d+)(u|U|l|L|ul|UL|f|F)"},hljs.CNM,{cN:"preprocessor",b:"#",e:"$"},{cN:"stl_container",b:"\\b(deque|list|queue|stack|vector|map|set|bitset|multiset|multimap|unordered_map|unordered_set|unordered_multiset|unordered_multimap|array)\\s*<",e:">",k:a,r:10,c:["self"]}]}}}();hljs.LANGUAGES.r={dM:{c:[hljs.HCM,{cN:"number",b:"\\b0[xX][0-9a-fA-F]+[Li]?\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\b\\d+(?:[eE][+\\-]?\\d*)?L\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\b\\d+\\.(?!\\d)(?:i\\b)?",e:hljs.IMMEDIATE_RE,r:1},{cN:"number",b:"\\b\\d+(?:\\.\\d*)?(?:[eE][+\\-]?\\d*)?i?\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\.\\d+(?:[eE][+\\-]?\\d*)?i?\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"keyword",b:"(?:tryCatch|library|setGeneric|setGroupGeneric)\\b",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\.\\.\\.",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\.\\.\\d+(?![\\w.])",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\b(?:function)",e:hljs.IMMEDIATE_RE,r:2},{cN:"keyword",b:"(?:if|in|break|next|repeat|else|for|return|switch|while|try|stop|warning|require|attach|detach|source|setMethod|setClass)\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"literal",b:"(?:NA|NA_integer_|NA_real_|NA_character_|NA_complex_)\\b",e:hljs.IMMEDIATE_RE,r:10},{cN:"literal",b:"(?:NULL|TRUE|FALSE|T|F|Inf|NaN)\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"identifier",b:"[a-zA-Z.][a-zA-Z0-9._]*\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"operator",b:"<\\-(?!\\s*\\d)",e:hljs.IMMEDIATE_RE,r:2},{cN:"operator",b:"\\->|<\\-",e:hljs.IMMEDIATE_RE,r:1},{cN:"operator",b:"%%|~",e:hljs.IMMEDIATE_RE},{cN:"operator",b:">=|<=|==|!=|\\|\\||&&|=|\\+|\\-|\\*|/|\\^|>|<|!|&|\\||\\$|:",e:hljs.IMMEDIATE_RE,r:0},{cN:"operator",b:"%",e:"%",i:"\\n",r:1},{cN:"identifier",b:"`",e:"`",r:0},{cN:"string",b:'"',e:'"',c:[hljs.BE],r:0},{cN:"string",b:"'",e:"'",c:[hljs.BE],r:0},{cN:"paren",b:"[[({\\])}]",e:hljs.IMMEDIATE_RE,r:0}]}};
+hljs.initHighlightingOnLoad();
+</script>
+
+
+
+<style type="text/css">
+body, td {
+   font-family: sans-serif;
+   background-color: white;
+   font-size: 13px;
+}
+
+body {
+  max-width: 800px;
+  margin: auto;
+  padding: 1em;
+  line-height: 20px;
+}
+
+tt, code, pre {
+   font-family: 'DejaVu Sans Mono', 'Droid Sans Mono', 'Lucida Console', Consolas, Monaco, monospace;
+}
+
+h1 {
+   font-size:2.2em;
+}
+
+h2 {
+   font-size:1.8em;
+}
+
+h3 {
+   font-size:1.4em;
+}
+
+h4 {
+   font-size:1.0em;
+}
+
+h5 {
+   font-size:0.9em;
+}
+
+h6 {
+   font-size:0.8em;
+}
+
+a:visited {
+   color: rgb(50%, 0%, 50%);
+}
+
+pre, img {
+  max-width: 100%;
+}
+pre {
+  overflow-x: auto;
+}
+pre code {
+   display: block; padding: 0.5em;
+}
+
+code {
+  font-size: 92%;
+  border: 1px solid #ccc;
+}
+
+code[class] {
+  background-color: #F8F8F8;
+}
+
+table, td, th {
+  border: none;
+}
+
+blockquote {
+   color:#666666;
+   margin:0;
+   padding-left: 1em;
+   border-left: 0.5em #EEE solid;
+}
+
+hr {
+   height: 0px;
+   border-bottom: none;
+   border-top-width: thin;
+   border-top-style: dotted;
+   border-top-color: #999999;
+}
+
+@media print {
+   * {
+      background: transparent !important;
+      color: black !important;
+      filter:none !important;
+      -ms-filter: none !important;
+   }
+
+   body {
+      font-size:12pt;
+      max-width:100%;
+   }
+
+   a, a:visited {
+      text-decoration: underline;
+   }
+
+   hr {
+      visibility: hidden;
+      page-break-before: always;
+   }
+
+   pre, blockquote {
+      padding-right: 1em;
+      page-break-inside: avoid;
+   }
+
+   tr, img {
+      page-break-inside: avoid;
+   }
+
+   img {
+      max-width: 100% !important;
+   }
+
+   @page :left {
+      margin: 15mm 20mm 15mm 10mm;
+   }
+
+   @page :right {
+      margin: 15mm 10mm 15mm 20mm;
+   }
+
+   p, h2, h3 {
+      orphans: 3; widows: 3;
+   }
+
+   h2, h3 {
+      page-break-after: avoid;
+   }
+}
+</style>
+
+
+
+</head>
+
+<body>
+<h2>Table of Contents {#toc}</h2>
+
+<ol>
+<li><a href="#intro">Introduction</a></li>
+<li><a href="#bitset">Bitset</a></li>
+<li><a href="#prefab">Prefabs</a></li>
+<li><a href="#cpp_prefab">C++ Prefabs</a></li>
+</ol>
+
+<h2>Introduction {#intro}</h2>
+
+<p>Individual is designed for running big individual-based models. But if you find your model taking too long or consuming all of your memory, here are some things you can try to speed up your simulation.</p>
+
+<h3>Bitset {#bitset}</h3>
+
+<p>The <a href="https://en.wikipedia.org/wiki/Bit_array">bitset</a> data structure is used to record the presence or absence of an element in a finite set. <code>individual::Bitset</code> implements this data structure and is able to preform set operations extremely quickly using <a href="https://en.wikipedia.org/wiki/Bitwise_operation">bitwise operations</a>. Taking advantage of these operations can lead to very fast processes, when you need to find some particular subset of individuals.</p>
+
+<p>Let&#39;s take a look at the recovery process in <code>vignette(&quot;Tutorial&quot;)</code>. A crucial operation here is to get all infectious individuals who are not already scheduled for recovery. The object <code>I</code> is a bitset containing all those individuals currently infectious, and <code>already_scheduled</code> is another bitset containing those individuals scheduled for a recovery event. Using <code>already_scheduled$not()</code> returns a new bitset of those individuals <em>not</em> in the set of already scheduled persons. This is passed to the <code>I$and()</code>, which modifies <code>I</code> in-place so that the result is the intersection of currently infectious persons and persons who have not yet been scheduled for a recovery event, which is precisely the set of people we want.</p>
+
+<pre><code class="r">recovery_process &lt;- function(t){
+  I &lt;- health$get_index_of(&quot;I&quot;)
+  already_scheduled &lt;- recovery_event$get_scheduled()
+  I$and(already_scheduled$not())
+  rec_times &lt;- rgeom(n = I$size(),prob = pexp(q = gamma * dt)) + 1
+  recovery_event$schedule(target = I,delay = rec_times)
+}
+</code></pre>
+
+<p>Bitsets can also be efficiently sampled using <code>Bitset$sample()</code>. This is used in the infection process of <code>vignette(&quot;Tutorial&quot;)</code>. Once the per-capita force of infection (probability of moving from S to I during this time step) is calculated, the bitset <code>S</code> is sampled with that probability which modifies it in-place. The number of elements remaining after being sampled is binomially distributed. The argument <code>rate</code> can also be specified as a vector of probabilities, one for each element in the bitset.</p>
+
+<pre><code class="r">infection_process &lt;- function(t){
+  I &lt;- health$get_size_of(&quot;I&quot;)
+  foi &lt;- beta * I/N
+  S &lt;- health$get_index_of(&quot;S&quot;)
+  S$sample(rate = pexp(q = foi * dt))
+  health$queue_update(value = &quot;I&quot;,index = S)
+}
+</code></pre>
+
+<p>When creating a new Bitset, a user must specify the maximum size of the bitset. This is the maximum number of positive integers which the bitset can store. For example, if calling <code>Bitset$new(size = 100)</code>, the resulting object is able to store the presence or absence of integers between 1 and 100 (inclusive). Attempting to insert or remove elements outside of this range will result in an error.</p>
+
+<p>Bitsets offer methods to preform unions (<code>Bitset$or()</code>), intersections (<code>Bitset$and()</code>), symmetric set difference (also known as exclusive or, <code>Bitset$xor()</code>), and set difference (<code>Bitset$set_difference()</code>) with other bitsets. These methods modify the bitset in-place. The method <code>Bitset$not()</code> gives the complement of a bitset, and returns a new <code>individual::Bitset</code> object, leaving the original bitset intact. Because these set operations use bitwise operations directly rather than more expensive relational operators, computations with bitsets are extremely fast. Taking advantage of bitset operations can help make processes in &ldquo;individual&rdquo; much faster.</p>
+
+<p>This can be seen when implementing a common pattern in epidemiological models: sampling success or failure for a bitset of individuals, and then generating two bitsets to hold individuals sampled one way or the other. A first method might use <code>individual::filter_bitset</code>.</p>
+
+<pre><code class="r">n &lt;- 1e4
+bset &lt;- Bitset$new(n)$insert(1:n)
+probs &lt;- runif(n)
+
+keep &lt;- probs &gt;= 0.5
+
+stay &lt;- filter_bitset(bitset = bset,other = which(keep))
+leave &lt;- filter_bitset(bitset = bset,other = which(!keep))
+</code></pre>
+
+<p>This pattern is almost always slower than using the sample method with a set difference:</p>
+
+<pre><code class="r">stay &lt;- bset$copy()
+stay$sample(rate = probs)
+
+leave &lt;- bset$copy()$set_difference(stay)
+</code></pre>
+
+<p>In both instances the original bitset object <code>bset</code> is not modified. The latter pattern can be made even faster if the original may be modified by directly taking the set difference with it. For models with large population sizes, the speed differences can be substantial. </p>
+
+<p>Because a bitset stores integers in some finite set, it can be returned as an integer vector by using <code>Bitset$to_vector()</code>. However, this is a slow and expensive operation, as data must be copied into a new vector which is returned to R. If your model&#39;s dynamics require the frequent returning of integer vectors, an <code>individual::IntegerVector</code> object will be more appropriate. However, for most discrete variables, and especially those which mirror compartments in mathematical models, bitset operations and <code>individual::CategoricalVariable</code> (which uses bitsets internally) should be preferred.</p>
+
+<h3>Prefabs {#prefab}</h3>
+
+<p>Every time your processes ask for a variable, there is an overhead associated with moving simulation data into R, potentially incurring expensive copying of data.</p>
+
+<p>Because many epidemiological models have similar state transitions, we&#39;ve included several &ldquo;prefab&rdquo; processes and event listeners implemented in C++ which provide significant speed improvements and can be used out of the box in models. The functions return pointers which can be passed to the process list of <code>individual::simulate_loop</code> or event listeners just like closures in R. The processes available are:</p>
+
+<ul>
+<li><code>individual::bernoulli_process</code>: moves individuals from one categorical variable state to another at a constant probability</li>
+<li><code>individual::multi_probability_bernoulli_process</code>: moves individuals from one categorical variable state to another at a 
+individual level probability specified by a <code>individual::DoubleVariable</code> object</li>
+<li><code>individual::fixed_probability_multinomial_process</code>: moves individuals from one categorical variable state to a set of possible destination
+values with constant probability to leave and multinomially distributed choice of destination state.</li>
+<li><code>individual::multi_probability_multinomial_process</code>: moves individuals from one categorical variable state to a set of possible destination
+values with individual level probability to leave specified by a <code>individual::DoubleVariable</code> object and multinomially distributed choice of destination state.</li>
+<li><code>individual::infection_age_process</code>: Simulates infection for age-structured models, where individuals come into contact at a rate given by a mixing (contact) matrix.</li>
+</ul>
+
+<p>Prefabs for event listeners and renderers:</p>
+
+<ul>
+<li><code>individual::update_category_listener</code>: event listener for <code>individual::TargetedEvent</code> objects which updates the categorical variable state when it fires.</li>
+<li><code>individual::reschedule_listener</code>: event listener for <code>individual::TargetedEvent</code> objects which schedules some new followup event when it fires.</li>
+<li><code>individual::categorical_count_renderer_process</code>: used for <code>individual::Render</code> objects that counts the size of each state in a categorical variable.</li>
+</ul>
+
+<h3>C++ Prefabs {#cpp_prefab}</h3>
+
+<p>Unfortunately, we don&#39;t have a prefab for every situation. Please feel free to write one of your own!</p>
+
+<p>These are the basic steps to add C++ processes to your R package:</p>
+
+<ol>
+<li>Run <code>usethis::use_rcpp</code> to set your package up for C++ development.</li>
+<li>Add <code>individual</code> to the <code>LinkingTo</code> section of your package DESCRIPTION.</li>
+<li><p>If you package is named <code>mypackage</code>, create a header file containing <code>#include&lt;individual.h&gt;</code> in any of these locations:</p>
+
+<pre><code class="cpp">src/mypackage_types.h
+src/mypackage_types.hpp
+inst/include/mypackage_types.h
+inst/include/mypackage_types.hpp
+</code></pre>
+
+<p>Then this header file will be automatically included in <code>RcppExports.cpp</code>. For more information, see section &ldquo;2.5 Types in Generated Code&rdquo; in the <a href="https://CRAN.R-project.org/package=Rcpp/vignettes/Rcpp-attributes.pdf">Rcpp Attributes vignette</a>.</p></li>
+<li><p>Create a file <code>src/Makecars</code> containing the line <code>CXX_STD = CXX14</code>. Because <code>individual</code> uses C++14 features, when compiling your package against it you must let the compiler know it should use the C++14 standard, otherwise it will not be able to compile. </p></li>
+<li><p>Write your process!</p></li>
+</ol>
+
+<p>Processes in C++ are of type <code>process_t</code>, defined in <code>inst/include/common_types.h</code>. Types for listeners for <code>individual::Event</code> and <code>individual::TargetedEvent</code> are <code>listener_t</code> and <code>targeted_listener_t</code>, defined in <code>inst/include/Event.h</code>. Below is how the C++ implementation of
+<code>multi_probability_bernoulli_process</code> is coded.</p>
+
+<p>Note that the return type is a <code>Rcpp::XPtr</code> <a href="https://dirk.eddelbuettel.com/code/rcpp/html/classRcpp_1_1XPtr.html">(see here)</a> to a <code>process_t</code>, which is implemented as a <code>std::function</code> <a href="http://www.cplusplus.com/reference/functional/function/">(see here)</a> object, a C++ class that can
+hold any callable type. The <code>Rcpp::XPtr</code> is initialized with a pointer to a <code>process_t</code> object, which itself holds a C++ <a href="https://en.cppreference.com/w/cpp/language/lambda">lambda function</a>, basically a function closure.</p>
+
+<p>The lambda function captures the input arguments by value, and takes a single argument when called <code>t</code>, giving the current time step (just like process functions in R). Sampling those individuals to change state is implemented with the C++ API for these objects.</p>
+
+<pre><code class="cpp">#include &lt;individual.h&gt;
+#include &lt;Rcpp.h&gt;
+
+// [[Rcpp::export]]
+Rcpp::XPtr&lt;process_t&gt; multi_probability_bernoulli_process_cpp(
+    Rcpp::XPtr&lt;CategoricalVariable&gt; variable,
+    const std::string from,
+    const std::string to,
+    const Rcpp::XPtr&lt;DoubleVariable&gt; rate_variable
+){
+
+    // make pointer to lambda function and return XPtr to R
+    return Rcpp::XPtr&lt;process_t&gt;(
+        new process_t([variable,rate_variable,from,to](size_t t){      
+
+            // sample leavers with their unique prob
+            individual_index_t leaving_individuals(variable-&gt;get_index_of(std::vector&lt;std::string&gt;{from}));
+            std::vector&lt;double&gt; rate_vector = rate_variable-&gt;get_values(leaving_individuals);
+            bitset_sample_multi_internal(leaving_individuals, rate_vector.begin(), rate_vector.end());
+
+            variable-&gt;queue_update(to, leaving_individuals);
+
+        }),
+        true
+    ); 
+};
+
+</code></pre>
+
+<p>The exported function can be used normally in R when creating the list of processes:</p>
+
+<pre><code class="r">processes &lt;- list(
+  multi_probability_bernoulli_process_cpp(state, &quot;I&quot;, &quot;R&quot;, prob),
+  other_process_1,
+  other_process_2
+)
+</code></pre>
+
+<p>That&#39;s everything you need to scale your models up to millions of individuals!</p>
+
+</body>
+
+</html>
