@@ -1,7 +1,8 @@
 #' @title DoubleVariable Class
 #' @description Represents a continuous variable for an individual.
+#' @importFrom R6 R6Class
 #' @export
-DoubleVariable <- R6::R6Class(
+DoubleVariable <- R6Class(
   'DoubleVariable',
   public = list(
     .variable = NULL,
@@ -84,6 +85,7 @@ DoubleVariable <- R6::R6Class(
           index <- index$to_vector()
         }
         if (length(index) != 0) {
+          stopifnot(all(index > 0))
           double_variable_queue_update(
             self$.variable,
             values,

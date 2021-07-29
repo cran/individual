@@ -4,8 +4,9 @@
 #' but can be used for variables with unbounded ranges, or other situations where part
 #' of an individual's state is better represented by an integer, such as
 #' household or age bin.
+#' @importFrom R6 R6Class
 #' @export
-IntegerVariable <- R6::R6Class(
+IntegerVariable <- R6Class(
   'IntegerVariable',
   public = list(
 
@@ -36,7 +37,7 @@ IntegerVariable <- R6::R6Class(
     #' Either search for indices corresponding to values in \code{set}, or
     #' for indices corresponding to values in range \eqn{[a,b]}. Either \code{set}
     #' or \code{a} and \code{b} must be provided as arguments.
-    #' @param set a vector of values 
+    #' @param set a vector of values (providing \code{set} means \code{a,b} are ignored)
     #' @param a lower bound
     #' @param b upper bound
     get_index_of = function(set = NULL, a = NULL, b = NULL) {
@@ -46,10 +47,14 @@ IntegerVariable <- R6::R6Class(
             } else {
               return(Bitset$new(from = integer_variable_get_index_of_set_scalar(self$.variable, set)))
             }
-        }
-        if(!is.null(a) & !is.null(b)) {
-            stopifnot(a < b)
-            return(Bitset$new(from = integer_variable_get_index_of_range(self$.variable, a, b)))            
+        } else {
+          stopifnot(all(is.finite(c(a,b))))
+          stopifnot(a <= b)
+          if (a < b) {
+            return(Bitset$new(from = integer_variable_get_index_of_range(self$.variable, a, b)))              
+          } else {
+            return(Bitset$new(from = integer_variable_get_index_of_set_scalar(self$.variable, a))) 
+          }
         }
         stop("please provide a set of values to check, or both bounds of range [a,b]")        
     },
@@ -58,22 +63,26 @@ IntegerVariable <- R6::R6Class(
     #' Either search for indices corresponding to values in \code{set}, or
     #' for indices corresponding to values in range \eqn{[a,b]}. Either \code{set}
     #' or \code{a} and \code{b} must be provided as arguments.
-    #' @param set a vector of values 
+    #' @param set a vector of values (providing \code{set} means \code{a,b} are ignored)
     #' @param a lower bound
     #' @param b upper bound
-    get_size_of = function(set = NULL, a = NULL, b = NULL) {        
-        if (!is.null(set)) {
-            if (length(set) > 1) {
-              return(integer_variable_get_size_of_set_vector(self$.variable, set))  
-            } else {
-              return(integer_variable_get_size_of_set_scalar(self$.variable, set))
-            }
+    get_size_of = function(set = NULL, a = NULL, b = NULL) {    
+      if(!is.null(set)) {
+        if (length(set) > 1) {
+          return(integer_variable_get_size_of_set_vector(self$.variable, set))
+        } else {
+          return(integer_variable_get_size_of_set_scalar(self$.variable, set))
         }
-        if (!is.null(a) & !is.null(b)) {
-            stopifnot(a < b)
-            return(integer_variable_get_size_of_range(self$.variable, a, b))           
+      } else {
+        stopifnot(all(is.finite(c(a,b))))
+        stopifnot(a <= b)
+        if (a < b) {
+          return(integer_variable_get_size_of_range(self$.variable, a, b))
+        } else {
+          return(integer_variable_get_size_of_set_scalar(self$.variable, a))
         }
-        stop("please provide a set of values to check, or both bounds of range [a,b]")        
+      }
+      stop("please provide a set of values to check, or both bounds of range [a,b]")    
     },
 
     #' @description Queue an update for a variable. There are 4 types of variable update:
@@ -116,6 +125,7 @@ IntegerVariable <- R6::R6Class(
           index <- index$to_vector()
         }
         if (length(index) != 0) {
+          stopifnot(all(index > 0))
           integer_variable_queue_update(
             self$.variable,
             values,

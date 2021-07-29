@@ -1,6 +1,6 @@
 Package: individual
 Title: Framework for Specifying and Simulating Individual Based Models
-Version: 0.1.1
+Version: 0.1.4
 Authors@R: c(
   person(
     given = "Giovanni",
@@ -49,11 +49,11 @@ VignetteBuilder: knitr
 LinkingTo: Rcpp, testthat
 RcppModules: individual_cpp
 NeedsCompilation: yes
-Packaged: 2021-06-14 08:36:45 UTC; root
+Packaged: 2021-07-28 11:26:03 UTC; root
 Author: Giovanni Charles [aut, cre],
   Sean L. Wu [aut] (<https://orcid.org/0000-0002-5781-9493>),
   Pete Winskill [aut],
   Imperial College of Science, Technology and Medicine [cph]
 Maintainer: Giovanni Charles <giovanni.charles@gmail.com>
 Repository: CRAN
-Date/Publication: 2021-06-15 07:50:02 UTC
+Date/Publication: 2021-07-29 08:30:06 UTC

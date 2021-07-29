@@ -1,7 +1,8 @@
 #' @title Event Class
 #' @description Describes a general event in the simulation
+#' @importFrom R6 R6Class
 #' @export
-Event <- R6::R6Class(
+Event <- R6Class(
   'Event',
   public = list(
 
