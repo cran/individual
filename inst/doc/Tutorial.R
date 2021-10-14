@@ -55,7 +55,7 @@ recovery_event$add_listener(function(t, target) {
 recovery_process <- function(t){
   I <- health$get_index_of("I")
   already_scheduled <- recovery_event$get_scheduled()
-  I$and(already_scheduled$not())
+  I$and(already_scheduled$not(inplace = TRUE))
   rec_times <- rgeom(n = I$size(),prob = pexp(q = gamma * dt)) + 1
   recovery_event$schedule(target = I,delay = rec_times)
 }

@@ -87,13 +87,14 @@ BEGIN_RCPP
 END_RCPP
 }
 // bitset_not
-Rcpp::XPtr<individual_index_t> bitset_not(const Rcpp::XPtr<individual_index_t> b);
-RcppExport SEXP _individual_bitset_not(SEXP bSEXP) {
+Rcpp::XPtr<individual_index_t> bitset_not(const Rcpp::XPtr<individual_index_t> b, const bool inplace);
+RcppExport SEXP _individual_bitset_not(SEXP bSEXP, SEXP inplaceSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< const Rcpp::XPtr<individual_index_t> >::type b(bSEXP);
-    rcpp_result_gen = Rcpp::wrap(bitset_not(b));
+    Rcpp::traits::input_parameter< const bool >::type inplace(inplaceSEXP);
+    rcpp_result_gen = Rcpp::wrap(bitset_not(b, inplace));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -406,6 +407,18 @@ BEGIN_RCPP
     return R_NilValue;
 END_RCPP
 }
+// double_variable_queue_update_bitset
+void double_variable_queue_update_bitset(Rcpp::XPtr<DoubleVariable> variable, const std::vector<double> value, Rcpp::XPtr<individual_index_t> index);
+RcppExport SEXP _individual_double_variable_queue_update_bitset(SEXP variableSEXP, SEXP valueSEXP, SEXP indexSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::XPtr<DoubleVariable> >::type variable(variableSEXP);
+    Rcpp::traits::input_parameter< const std::vector<double> >::type value(valueSEXP);
+    Rcpp::traits::input_parameter< Rcpp::XPtr<individual_index_t> >::type index(indexSEXP);
+    double_variable_queue_update_bitset(variable, value, index);
+    return R_NilValue;
+END_RCPP
+}
 // double_variable_update
 void double_variable_update(Rcpp::XPtr<DoubleVariable> variable);
 RcppExport SEXP _individual_double_variable_update(SEXP variableSEXP) {
@@ -526,14 +539,26 @@ BEGIN_RCPP
 END_RCPP
 }
 // targeted_event_schedule_multi_delay
-void targeted_event_schedule_multi_delay(const Rcpp::XPtr<TargetedEvent> event, std::vector<size_t> target, const std::vector<double> delay);
+void targeted_event_schedule_multi_delay(const Rcpp::XPtr<TargetedEvent> event, const Rcpp::XPtr<individual_index_t> target, const std::vector<double> delay);
 RcppExport SEXP _individual_targeted_event_schedule_multi_delay(SEXP eventSEXP, SEXP targetSEXP, SEXP delaySEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const Rcpp::XPtr<TargetedEvent> >::type event(eventSEXP);
+    Rcpp::traits::input_parameter< const Rcpp::XPtr<individual_index_t> >::type target(targetSEXP);
+    Rcpp::traits::input_parameter< const std::vector<double> >::type delay(delaySEXP);
+    targeted_event_schedule_multi_delay(event, target, delay);
+    return R_NilValue;
+END_RCPP
+}
+// targeted_event_schedule_multi_delay_vector
+void targeted_event_schedule_multi_delay_vector(const Rcpp::XPtr<TargetedEvent> event, std::vector<size_t> target, const std::vector<double> delay);
+RcppExport SEXP _individual_targeted_event_schedule_multi_delay_vector(SEXP eventSEXP, SEXP targetSEXP, SEXP delaySEXP) {
 BEGIN_RCPP
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< const Rcpp::XPtr<TargetedEvent> >::type event(eventSEXP);
     Rcpp::traits::input_parameter< std::vector<size_t> >::type target(targetSEXP);
     Rcpp::traits::input_parameter< const std::vector<double> >::type delay(delaySEXP);
-    targeted_event_schedule_multi_delay(event, target, delay);
+    targeted_event_schedule_multi_delay_vector(event, target, delay);
     return R_NilValue;
 END_RCPP
 }
@@ -736,6 +761,18 @@ BEGIN_RCPP
     return R_NilValue;
 END_RCPP
 }
+// integer_variable_queue_update_bitset
+void integer_variable_queue_update_bitset(Rcpp::XPtr<IntegerVariable> variable, const std::vector<int> value, Rcpp::XPtr<individual_index_t> index);
+RcppExport SEXP _individual_integer_variable_queue_update_bitset(SEXP variableSEXP, SEXP valueSEXP, SEXP indexSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::XPtr<IntegerVariable> >::type variable(variableSEXP);
+    Rcpp::traits::input_parameter< const std::vector<int> >::type value(valueSEXP);
+    Rcpp::traits::input_parameter< Rcpp::XPtr<individual_index_t> >::type index(indexSEXP);
+    integer_variable_queue_update_bitset(variable, value, index);
+    return R_NilValue;
+END_RCPP
+}
 // integer_variable_update
 void integer_variable_update(Rcpp::XPtr<IntegerVariable> variable);
 RcppExport SEXP _individual_integer_variable_update(SEXP variableSEXP) {
@@ -837,7 +874,7 @@ RcppExport SEXP _individual_RcppExport_registerCCallable() {
     return R_NilValue;
 }
 
-RcppExport SEXP run_testthat_tests(SEXP use_xml_sxp);
+RcppExport SEXP run_testthat_tests();
 
 static const R_CallMethodDef CallEntries[] = {
     {"_individual_create_bitset", (DL_FUNC) &_individual_create_bitset, 1},
@@ -847,7 +884,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_individual_bitset_size", (DL_FUNC) &_individual_bitset_size, 1},
     {"_individual_bitset_max_size", (DL_FUNC) &_individual_bitset_max_size, 1},
     {"_individual_bitset_and", (DL_FUNC) &_individual_bitset_and, 2},
-    {"_individual_bitset_not", (DL_FUNC) &_individual_bitset_not, 1},
+    {"_individual_bitset_not", (DL_FUNC) &_individual_bitset_not, 2},
     {"_individual_bitset_or", (DL_FUNC) &_individual_bitset_or, 2},
     {"_individual_bitset_xor", (DL_FUNC) &_individual_bitset_xor, 2},
     {"_individual_bitset_set_difference", (DL_FUNC) &_individual_bitset_set_difference, 2},
@@ -873,6 +910,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_individual_double_variable_get_size_of_range", (DL_FUNC) &_individual_double_variable_get_size_of_range, 3},
     {"_individual_double_variable_queue_fill", (DL_FUNC) &_individual_double_variable_queue_fill, 2},
     {"_individual_double_variable_queue_update", (DL_FUNC) &_individual_double_variable_queue_update, 3},
+    {"_individual_double_variable_queue_update_bitset", (DL_FUNC) &_individual_double_variable_queue_update_bitset, 3},
     {"_individual_double_variable_update", (DL_FUNC) &_individual_double_variable_update, 1},
     {"_individual_create_event", (DL_FUNC) &_individual_create_event, 0},
     {"_individual_create_targeted_event", (DL_FUNC) &_individual_create_targeted_event, 1},
@@ -885,6 +923,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_individual_targeted_event_schedule", (DL_FUNC) &_individual_targeted_event_schedule, 3},
     {"_individual_targeted_event_schedule_vector", (DL_FUNC) &_individual_targeted_event_schedule_vector, 3},
     {"_individual_targeted_event_schedule_multi_delay", (DL_FUNC) &_individual_targeted_event_schedule_multi_delay, 3},
+    {"_individual_targeted_event_schedule_multi_delay_vector", (DL_FUNC) &_individual_targeted_event_schedule_multi_delay_vector, 3},
     {"_individual_event_get_timestep", (DL_FUNC) &_individual_event_get_timestep, 1},
     {"_individual_event_should_trigger", (DL_FUNC) &_individual_event_should_trigger, 1},
     {"_individual_targeted_event_get_target", (DL_FUNC) &_individual_targeted_event_get_target, 1},
@@ -902,6 +941,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_individual_integer_variable_get_size_of_range", (DL_FUNC) &_individual_integer_variable_get_size_of_range, 3},
     {"_individual_integer_variable_queue_fill", (DL_FUNC) &_individual_integer_variable_queue_fill, 2},
     {"_individual_integer_variable_queue_update", (DL_FUNC) &_individual_integer_variable_queue_update, 3},
+    {"_individual_integer_variable_queue_update_bitset", (DL_FUNC) &_individual_integer_variable_queue_update_bitset, 3},
     {"_individual_integer_variable_update", (DL_FUNC) &_individual_integer_variable_update, 1},
     {"_individual_fixed_probability_multinomial_process_internal", (DL_FUNC) &_individual_fixed_probability_multinomial_process_internal, 5},
     {"_individual_multi_probability_multinomial_process_internal", (DL_FUNC) &_individual_multi_probability_multinomial_process_internal, 5},
@@ -909,7 +949,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_individual_infection_age_process_internal", (DL_FUNC) &_individual_infection_age_process_internal, 9},
     {"_individual_execute_process", (DL_FUNC) &_individual_execute_process, 2},
     {"_individual_RcppExport_registerCCallable", (DL_FUNC) &_individual_RcppExport_registerCCallable, 0},
-    {"run_testthat_tests", (DL_FUNC) &run_testthat_tests, 1},
+    {"run_testthat_tests", (DL_FUNC) &run_testthat_tests, 0},
     {NULL, NULL, 0}
 };
 

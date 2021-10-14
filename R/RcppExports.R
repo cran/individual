@@ -29,8 +29,8 @@ bitset_and <- function(a, b) {
     invisible(.Call(`_individual_bitset_and`, a, b))
 }
 
-bitset_not <- function(b) {
-    .Call(`_individual_bitset_not`, b)
+bitset_not <- function(b, inplace) {
+    .Call(`_individual_bitset_not`, b, inplace)
 }
 
 bitset_or <- function(a, b) {
@@ -129,6 +129,10 @@ double_variable_queue_update <- function(variable, value, index) {
     invisible(.Call(`_individual_double_variable_queue_update`, variable, value, index))
 }
 
+double_variable_queue_update_bitset <- function(variable, value, index) {
+    invisible(.Call(`_individual_double_variable_queue_update_bitset`, variable, value, index))
+}
+
 double_variable_update <- function(variable) {
     invisible(.Call(`_individual_double_variable_update`, variable))
 }
@@ -175,6 +179,10 @@ targeted_event_schedule_vector <- function(event, target, delay) {
 
 targeted_event_schedule_multi_delay <- function(event, target, delay) {
     invisible(.Call(`_individual_targeted_event_schedule_multi_delay`, event, target, delay))
+}
+
+targeted_event_schedule_multi_delay_vector <- function(event, target, delay) {
+    invisible(.Call(`_individual_targeted_event_schedule_multi_delay_vector`, event, target, delay))
 }
 
 event_get_timestep <- function(event) {
@@ -243,6 +251,10 @@ integer_variable_queue_fill <- function(variable, value) {
 
 integer_variable_queue_update <- function(variable, value, index) {
     invisible(.Call(`_individual_integer_variable_queue_update`, variable, value, index))
+}
+
+integer_variable_queue_update_bitset <- function(variable, value, index) {
+    invisible(.Call(`_individual_integer_variable_queue_update_bitset`, variable, value, index))
 }
 
 integer_variable_update <- function(variable) {

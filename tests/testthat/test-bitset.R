@@ -43,6 +43,7 @@ test_that("bitset or works", {
 })
 
 test_that("bitset set difference works for sets with intersection", {
+  
   a <- Bitset$new(20)
   b <- Bitset$new(20)
   a0 <- 1:10
@@ -50,12 +51,13 @@ test_that("bitset set difference works for sets with intersection", {
   a$insert(a0)
   b$insert(b0)
   a$set_difference(b)
-  expect_equal(
-    a$to_vector(), setdiff(a0,b0)
-  )
+  
+  expect_equal(a$to_vector(), setdiff(a0,b0))
+  expect_equal(b$to_vector(), b0)
 })
 
 test_that("bitset set difference works for disjoint sets", {
+  
   a <- Bitset$new(20)
   b <- Bitset$new(20)
   a0 <- 1:10
@@ -63,12 +65,13 @@ test_that("bitset set difference works for disjoint sets", {
   a$insert(a0)
   b$insert(b0)
   a$set_difference(b)
-  expect_equal(
-    a$to_vector(), setdiff(a0,b0)
-  )
+  
+  expect_equal(a$to_vector(), setdiff(a0,b0))
+  expect_equal(b$to_vector(), b0)
 })
 
 test_that("bitset set difference works for identical sets", {
+  
   a <- Bitset$new(20)
   b <- Bitset$new(20)
   a0 <- 1:10
@@ -76,12 +79,13 @@ test_that("bitset set difference works for identical sets", {
   a$insert(a0)
   b$insert(b0)
   a$set_difference(b)
-  expect_length(
-    a$to_vector(), 0
-  )
+  
+  expect_length(a$to_vector(), 0)
+  expect_equal(b$to_vector(), b0)
 })
 
 test_that("bitset xor works for identical sets", {
+  
   a <- Bitset$new(20)
   b <- Bitset$new(20)
   a0 <- 1:10
@@ -89,12 +93,13 @@ test_that("bitset xor works for identical sets", {
   a$insert(a0)
   b$insert(b0)
   a$xor(b)
-  expect_length(
-    a$to_vector(), 0
-  )
+  
+  expect_length(a$to_vector(), 0)
+  expect_equal(b$to_vector(), b0)
 })
 
 test_that("bitset xor works for sets with intersection", {
+  
   sym_diff <- function(a,b) {setdiff(union(a,b), intersect(a,b))}
   a <- Bitset$new(20)
   b <- Bitset$new(20)
@@ -103,12 +108,13 @@ test_that("bitset xor works for sets with intersection", {
   a$insert(a0)
   b$insert(b0)
   a$xor(b)
-  expect_equal(
-    a$to_vector(), sym_diff(a0,b0)
-  )
+  
+  expect_equal(a$to_vector(), sym_diff(a0,b0))
+  expect_equal(b$to_vector(), b0)
 })
 
 test_that("bitset xor works for disjoint sets", {
+  
   a <- Bitset$new(20)
   b <- Bitset$new(20)
   a0 <- 1:5
@@ -116,20 +122,20 @@ test_that("bitset xor works for disjoint sets", {
   a$insert(a0)
   b$insert(b0)
   a$xor(b)
-  expect_equal(
-    a$to_vector(), 1:10
-  )
+  
+  expect_equal(a$to_vector(), 1:10)
+  expect_equal(b$to_vector(), b0)
 })
 
 
 test_that("bitset combinations work", {
-  a <- Bitset$new(10)$not()
+  a <- Bitset$new(10)$not(FALSE)
   b <- Bitset$new(10)
   expect_equal(a$or(b)$to_vector(), seq(10))
 })
 
 test_that("multi-word bitset combinations work", {
-  a <- Bitset$new(100)$not()
+  a <- Bitset$new(100)$not(FALSE)
   b <- Bitset$new(100)
   expect_equal(a$or(b)$to_vector(), seq(100))
 })
@@ -137,8 +143,19 @@ test_that("multi-word bitset combinations work", {
 test_that("bitset inverse works", {
   a <- Bitset$new(10)
   a$insert(c(1, 5, 6))
-  expect_equal(a$not()$to_vector(), c(2, 3, 4, 7, 8, 9, 10))
-  expect_equal(a$not()$size(), 7)
+  expect_equal(a$not(FALSE)$to_vector(), c(2, 3, 4, 7, 8, 9, 10))
+  expect_equal(a$not(TRUE)$size(), 7)
+})
+
+test_that("bitset not inplace switch works", {
+  a <- Bitset$new(10)
+  a$insert(c(1, 5, 6))
+  b <- a
+  a$not(TRUE)
+  expect_equal(b$to_vector(), c(2, 3, 4, 7, 8, 9, 10))
+  b <- b$not(FALSE)
+  expect_equal(a$to_vector(), c(2, 3, 4, 7, 8, 9, 10))
+  expect_equal(b$to_vector(), c(1, 5, 6))
 })
 
 test_that("bitset sample works at rate = 0", {
@@ -181,20 +198,12 @@ test_that("bitset throws error when given bad input probabilities in sample", {
   )
 })
 
-test_that("bitset choose behaves properly when given an empty bitset", {
+test_that("bitset choose behaves properly when given bad input", {
   b <- Bitset$new(10)
-  expect_error(
-    b$choose(5)
-  )
-  expect_error(
-    b$choose(-1)
-  )
-  expect_error(
-    b$choose(100)
-  )
-  expect_error(
-    b$choose(Inf)
-  )
+  expect_error(b$choose(5))
+  expect_error(b$choose(-1))
+  expect_error(b$choose(100))
+  expect_error(b$choose(Inf))
 })
 
 test_that("bitset choose behaves properly when given a bitset with elements", {

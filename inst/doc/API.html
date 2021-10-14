@@ -235,7 +235,7 @@ hr {
 
 <p>In &ldquo;individual&rdquo;, variables are how one defines state, and represent any attribute of an individual. While many variables will be dynamically updated throughout a simulation, they don&#39;t have to be. Specifying a baseline characteristic for each individual that doesn&#39;t change over a simulation will still be specified using a variable object.</p>
 
-<p>There are 3 types of variable objects: <code>individual::CategoricalVariable</code> for discrete variables taking values in a finite set, <code>individual::IntegerVariable</code> for discrete integer variables, and <code>individual::DoubleVariable</code> for continuous variables.</p>
+<p>There are 3 types of variable objects: <code>individual::CategoricalVariable</code> can represent a set of mutually exclusive categories, <code>individual::IntegerVariable</code> for representing integers, and <code>individual::DoubleVariable</code> for continuous values (real numbers).</p>
 
 <h3>Categorical Variable {#cat_var}</h3>
 
@@ -300,7 +300,7 @@ chisq.test(times, rgeom(n,prob = 0.1),simulate.p.value = T)
 #&gt;  replicates)
 #&gt; 
 #&gt; data:  times and rgeom(n, prob = 0.1)
-#&gt; X-squared = 8068.1, df = NA, p-value = 0.2769
+#&gt; X-squared = 5532, df = NA, p-value = 0.8431
 </code></pre>
 
 <p>By using <code>individual::IntegerVariable</code> and <code>individual::DoubleVariable</code> objects to modify the probability with which individuals move between states, as well as counters for recording previous state transitions and times, complex dynamics can be specified from simple building blocks. Several &ldquo;prefab&rdquo; functions are provided to make function closures corresponding to state transition processes common in epidemiological models.</p>
