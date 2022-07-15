@@ -11,6 +11,8 @@ DoubleVariable <- R6Class(
     #' @param initial_values a numeric vector of the initial value for each
     #' individual.
     initialize = function(initial_values) {
+      stopifnot(!is.null(initial_values))
+      stopifnot(is.numeric(initial_values))
       self$.variable <- create_double_variable(initial_values)
     },
 
@@ -25,20 +27,20 @@ DoubleVariable <- R6Class(
         if (inherits(index, 'Bitset')) {
           return(double_variable_get_values_at_index(self$.variable, index$.bitset))
         } else {
-          stopifnot(all(is.finite(index)))
-          stopifnot(all(index > 0))
+          stopifnot(is.finite(index))
+          stopifnot(index > 0)
           return(double_variable_get_values_at_index_vector(self$.variable, index))
         }
       }
     },
 
-    #' @description return a \code{\link[individual]{Bitset}} giving individuals 
+    #' @description return a \code{\link[individual]{Bitset}} giving individuals
     #' whose value lies in an interval \eqn{[a,b]}.
     #' @param a lower bound
     #' @param b upper bound
     get_index_of = function(a, b) {
       stopifnot(a < b)
-      return(Bitset$new(from = double_variable_get_index_of_range(self$.variable, a, b)))      
+      return(Bitset$new(from = double_variable_get_index_of_range(self$.variable, a, b)))
     },
 
     #' @description return the number of individuals whose value lies in an interval
@@ -62,7 +64,7 @@ DoubleVariable <- R6Class(
     #' whose length should match the size of the population, which fills all the variable values in
     #' the population}
     #'  \item{Variable fill: }{The index vector is set to \code{NULL} and the argument \code{values}
-    #' should be a single number, which fills all of the variable values in 
+    #' should be a single number, which fills all of the variable values in
     #' the population.}
     #' }
     #' @param values a vector or scalar of values to assign at the index.
@@ -70,14 +72,17 @@ DoubleVariable <- R6Class(
     #' fill options. If using indices, this may be either a vector of integers or
     #' a \code{\link[individual]{Bitset}}.
     queue_update = function(values, index = NULL) {
-      stopifnot(is.numeric(values))
+      stopifnot(is.numeric(values), !is.null(values))
       if(is.null(index)){
         if(length(values) == 1){
+          # variable fill
           double_variable_queue_fill(
             self$.variable,
             values
           )
         } else {
+          # variable reset
+          stopifnot(length(values) == variable_get_size(self$.variable))
           double_variable_queue_update(
             self$.variable,
             values,
@@ -86,6 +91,8 @@ DoubleVariable <- R6Class(
         }
       } else {
         if (inherits(index, 'Bitset')) {
+          # subset update/fill: bitset
+          stopifnot(index$max_size == variable_get_size(self$.variable))
           if (index$size() > 0){
             double_variable_queue_update_bitset(
               self$.variable,
@@ -95,8 +102,9 @@ DoubleVariable <- R6Class(
           }
         } else {
           if (length(index) != 0) {
-            stopifnot(all(is.finite(index)))
-            stopifnot(all(index > 0))
+            # subset update/fill: vector
+            stopifnot(is.finite(index))
+            stopifnot(index > 0)
             double_variable_queue_update(
               self$.variable,
               values,
@@ -107,6 +115,36 @@ DoubleVariable <- R6Class(
       }
     },
 
-    .update = function() double_variable_update(self$.variable)
+    #' @description extend the variable with new values
+    #' @param values to add to the variable
+    queue_extend = function(values) {
+      stopifnot(is.numeric(values))
+      double_variable_queue_extend(self$.variable, values)
+    },
+
+    #' @description shrink the variable
+    #' @param index a bitset or vector representing the individuals to remove
+    queue_shrink = function(index) {
+      if (inherits(index, 'Bitset')) {
+        if (index$size() > 0){
+          double_variable_queue_shrink_bitset(
+            self$.variable,
+            index$.bitset
+          )
+        }
+      } else {
+        if (length(index) != 0) {
+          stopifnot(all(is.finite(index)))
+          stopifnot(all(index > 0))
+          double_variable_queue_shrink(self$.variable, index)
+        }
+      }
+    },
+
+    #' @description get the size of the variable
+    size = function() variable_get_size(self$.variable),
+
+    .update = function() variable_update(self$.variable),
+    .resize = function() variable_resize(self$.variable)
   )
 )

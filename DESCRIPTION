@@ -1,6 +1,6 @@
 Package: individual
 Title: Framework for Specifying and Simulating Individual Based Models
-Version: 0.1.7
+Version: 0.1.9
 Authors@R: c(
   person(
     given = "Giovanni",
@@ -49,16 +49,16 @@ BugReports: https://github.com/mrc-ide/individual/issues
 Imports: R6, Rcpp
 Suggests: ggplot2, knitr, mockery, rmarkdown, pkgdown, testthat (>=
         2.1.0), xml2, bench
-RoxygenNote: 7.1.1
+RoxygenNote: 7.2.0
 VignetteBuilder: knitr
 LinkingTo: Rcpp, testthat
 RcppModules: individual_cpp
 NeedsCompilation: yes
-Packaged: 2021-10-21 14:42:50 UTC; root
+Packaged: 2022-07-15 14:30:10 UTC; root
 Author: Giovanni Charles [aut, cre] (<https://orcid.org/0000-0002-7024-1200>),
   Sean L. Wu [aut] (<https://orcid.org/0000-0002-5781-9493>),
   Peter Winskill [aut] (<https://orcid.org/0000-0003-3001-4959>),
   Imperial College of Science, Technology and Medicine [cph]
 Maintainer: Giovanni Charles <giovanni.charles@gmail.com>
 Repository: CRAN
-Date/Publication: 2021-10-25 07:00:08 UTC
+Date/Publication: 2022-07-15 15:00:02 UTC

@@ -82,7 +82,7 @@ size_t integer_variable_get_size_of_set_vector(
     Rcpp::XPtr<IntegerVariable> variable,
     const std::vector<int> values_set
 ) {
-    return variable->get_size_of_set_vector(values_set);
+    return variable->get_size_of_set(values_set);
 }
 
 // [[Rcpp::export]]
@@ -90,7 +90,7 @@ size_t integer_variable_get_size_of_set_scalar(
         Rcpp::XPtr<IntegerVariable> variable,
         const int value
 ) {
-    return variable->get_size_of_set_scalar(value);
+    return variable->get_size_of_set(value);
 }
 
 // [[Rcpp::export]]
@@ -127,14 +127,31 @@ void integer_variable_queue_update_bitset(
         const std::vector<int> value,
         Rcpp::XPtr<individual_index_t> index
 ) {
-    if (index->max_size() != variable->size) {
-        Rcpp::stop("incompatible size bitset used to queue update for IntegerVariable");
-    }
     auto index_vec = bitset_to_vector_internal(*index, false);
     variable->queue_update(value, index_vec);
 }
 
 //[[Rcpp::export]]
-void integer_variable_update(Rcpp::XPtr<IntegerVariable> variable) {
-    variable->update();
+void integer_variable_queue_extend(
+    Rcpp::XPtr<IntegerVariable> variable,
+    std::vector<int>& values
+    ) {
+    variable->queue_extend(values);
+}
+
+//[[Rcpp::export]]
+void integer_variable_queue_shrink(
+    Rcpp::XPtr<IntegerVariable> variable,
+    std::vector<size_t>& index
+    ) {
+    decrement(index);
+    variable->queue_shrink(index);
+}
+
+//[[Rcpp::export]]
+void integer_variable_queue_shrink_bitset(
+    Rcpp::XPtr<IntegerVariable> variable,
+    Rcpp::XPtr<individual_index_t> index
+    ) {
+    variable->queue_shrink(*index);
 }
